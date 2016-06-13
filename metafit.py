@@ -308,6 +308,7 @@ class Approximator:
             self.step()
             if self.solution.dist < dist:
                 grace = self.params.extendgrace
+                dist = self.solution.dist
             else:
                 grace -= 1
             self.stats.grace = grace
