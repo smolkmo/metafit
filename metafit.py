@@ -135,12 +135,13 @@ class Approximator:
 
         self.params = Object()
         self.params.varcount = None #Automatically set by addDataPoint
+        self.params.distancemetric = lambda data, fit: abs(data-fit)
         self.params.annealiters = 100000
         self.params.annealsched = lambda k, maxk: (1.0 - k/maxk)
         self.params.annealacceptp = lambda T, old, new: math.exp(-((new - old)/old)/T)
         self.params.annealrelbest = True #Rate new solutions relative to best solution (otherwise: relative to current solution)
         self.params.hardp = 0.5 #Probability for hard mutations that can change operators (other mutations are soft, i.e. simple value change)
-        self.params.extenditers = 10000 #Number of random extensions of which the best is choosen
+        self.params.extenditers = 10000 #Number of random extensions of which the best is chosen
         self.params.extendgrace = 10 #Number of extensions without improvement of the best solution, after which fitting will be concluded
 
         self.params.output_progress = True #Output after every step (instead of just at end)
@@ -232,8 +233,7 @@ class Approximator:
         dist=0
         for vars, val in self.data:
             try:
-                fval=expr.evaluate(vars)
-                dist+=abs(val-fval)
+                dist+=self.params.distancemetric(val,expr.evaluate(vars))
             except:
                 self.stats.failed_evals += 1
                 return None

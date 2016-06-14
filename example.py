@@ -4,6 +4,7 @@ app = metafit.Approximator()
 
 #Optional: Graph data set + fitted curve
 app.params.output_plot_file = "standardnormal_fit.png"
+app.params.output_solution_file = "standardnormal_fit.txt"
 
 #Load data set from a file
 for line in open("standardnormal.csv","r").readlines():
