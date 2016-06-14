@@ -1,5 +1,5 @@
 # metafit
-Naive, assumption-less curve fitting by simulated annealing
+Naive, assumption-less curve fitting by simulated annealing on function expression level
 
 ## Requirements
 * matplotlib (for visualization)
